@@ -1,0 +1,48 @@
+body{
+	color:#939396;
+	background-color:#1D2475;
+	font-family: sans-serif;
+}
+h1{
+	font-size:40pt;
+	color:#F7931E;
+	text-shadow: 3px -3px green;
+}
+h2{
+	color:#F7931E;
+}
+dl{
+	text-align: left;
+	font-size:70%;
+	font-weight: bold;
+}
+dt{
+	color: #FFF86B;
+}
+p{
+	/*font-size:150%;*/
+	font-weight: bold;
+}
+blockquote{
+	color:#D1DFEB;
+	text-align: left;
+}
+em{
+	color:#FFF86B;
+}
+a{
+	text-decoration: none;
+	color:#FF4F4F;
+}
+table, td, th { 
+	border: 2px solid black; 
+	border-collapse: collapse;
+}
+#pubg, #lol, #overwatch{
+	border:3px solid red ;
+}
+#cse{
+	left:500px;
+	float: right;
+	position:absolute;
+}
