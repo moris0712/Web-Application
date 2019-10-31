@@ -26,7 +26,12 @@
 			<ol>
 				<!-- Ex 2: Top Music News (Loops) -->
 				<!-- "http://www.aaa.com/<?php print $uid; ?>" -->
-				<?php for ($news_pages= 11; $news_pages>=1; $news_pages--) { ?>
+				<?php if(isset($_GET["newspages"]))
+					$newspages=$_GET["newspages"];
+					else
+						$newspages=10;
+				?>
+				<?php for ($news_pages= 11; $news_pages>=12-$newspages; $news_pages--) { ?>
 				<li><a href="https://www.billboard.com/archive/article/2019<?php echo sprintf("%02d",$news_pages); ?>">2019-<?= $news_pages ?>  </a></li>
 				<?php } ?>
 
@@ -60,19 +65,58 @@
 			<h2>My Music and Playlists</h2>
 
 			<ul id="musiclist">
-				<?php foreach (glob("lab5/musicPHP/songs/*.mp3") as $filename ) { ?>
-					<li class="mp3item"><a href="<?= $filename ?>"><?php echo basename($filename)?></a> <?php echo" (".(int)(filesize($filename)/1024)." KB)" ?></li>
+				<?php 
+
+				function arr_sort($array, $key, $sort='asc') //정렬대상 array, 정렬 기준 key, 오름/내림차순
+				{
+				 $keys = array();
+				 $vals = array();
+				 foreach ($array as $k=>$v)
+				 {
+				  $i = $v[$key].'.'.$k;
+				  $vals[$i] = $v;
+				  array_push($keys, $k);
+				 }
+				 unset($array);
+
+				 if ($sort=='asc') {
+				  ksort($vals);
+				 } else {
+				  krsort($vals);
+				 }
+
+				 $ret = array_combine($keys, $vals);
+				 unset($vals);
+				unset($keys);
+				 return $ret;
+				}
+
+				$size = array();  
+				foreach (glob("lab5/musicPHP/songs/*.mp3") as $filename ) { 
+					array_push($size,array("name" => basename($filename),"size" =>(filesize($filename))));
+				}
+				$size = arr_sort($size,"size",'desc');
+				foreach($size as $value){ ?>
+					<li class="mp3item"><a href="lab5/musicPHP/songs/<?= $value['name'] ?>"><?php echo $value['name'] ?> </a><?php echo" (".(int)($value['size']/1024)." KB)" ?></li>
 				<?php } ?>
+
+				
 				<!-- Exercise 8: Playlists (Files) -->
-				<?php foreach (glob("lab5/musicPHP/songs/*.m3u") as $filename) { ?> 
+				<?php 
+				foreach (glob("lab5/musicPHP/songs/*.m3u") as $filename) { 
+					$a = array(); ?> 
 					<li class="playlistitem"><?= basename($filename) ?></li>
 					<ul>
-					<?php foreach(file("$filename") as $line){ 
+					<?php 
+					foreach(file("$filename") as $line){ 
 						$pos = strpos($line,"#");
-						if ($pos === false){ ?>
-							<li><?= $line ?></li>
-							<?php } ?>
-					<?php }?>
+						if ($pos === false)
+							array_push($a,$line);
+						}
+						shuffle($a);
+						for ($i=0; $i<count($a); $i++) {?>
+							<li> <?= $a[$i] ?> </li>
+						<?php } ?>
 					</ul>
 				<?php } ?>
 				</ul>
