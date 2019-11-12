@@ -2,11 +2,10 @@
 <html>
   <head><title>CSE 3026s: Embedded PHP</title></head>    
   <body>
-    <?php for ($i = 99; $i >= 1; $i--) { ?>
-      <p> <?= $i ?> bottles of beer on the wall, <br />
-          <?= $i ?> bottles of beer. <br />
-          Take one down, pass it around, <br />
-          <?= $i - 1 ?> bottles of beer on the wall. </p>
-    <?php } ?>
+    <?php 
+    	$s = "아 섹 나 너마주 미친 드립 장성규 ";
+    	$a = explode(" ", $s);
+    	print $a;
+    ?>
   </body>
 </html>
