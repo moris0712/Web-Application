@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Pimp My Text!</title>
+		<link href="https://selab.hanyang.ac.kr/courses/cse326/2019/labs/labResources/pimpmytext.css" type="text/css" rel="stylesheet" />
+
+		<!-- This is a widely-used JavaScript library named Prototype that has 
+			 many useful functions, including the $() function, which we need.
+			 Please don't remove this link or change its URL; leave it as-is!
+		-->
+		<script type="text/javascript">
+			function bigger(){
+				var text = document.getElementById("text")
+				if(text.style.fontSize=="")
+					text.style.fontSize="12pt"
+				else
+					text.style.fontSize = parseInt(text.style.fontSize)+2+"pt"
+			}
+			function warning(){
+				//alert("Hello, world!");
+				var text = document.getElementById("text")
+				text.style.fontWeight= "bold"
+				var check = document.getElementById("checkbox")
+				var back = document.getElementById("body")
+				if(check.checked){
+					text.style.color="green"
+					text.style.textDecoration = "underline"
+					back.style.backgroundImage = "url(https://selab.hanyang.ac.kr/courses/cse326/2019/labs/images/8/hundred.jpg)"
+				}
+				else{
+					text.style = "none"
+					back.style.backgroundImage = "url()"
+				}
+
+			}
+			function upper(){
+				var text = document.getElementById("text")
+				//text.style.textTransform="uppercase"
+				text.value=text.value.toUpperCase();
+
+				var array = text.value.split(".")
+				text.value =array.join("-izzle")
+			}
+		</script>
+		
+		<!-- link to your script file here -->
+		
+	</head>
+
+	<body id="body">
+		<h1>Pimp My Text</h1>
+			<fieldset><legend>Text</legend>
+				<textarea id="text" rows="4" cols="30">
+					Here is the sample text. Let's see if the 'Bigger Pimpin'!' button works!
+				</textarea>
+			</fieldset>
+			<fieldset><legend>Pimp It</legend>
+				<button onclick="setInterval('bigger()',500);">Bigger Pimpin
+				</button><br/>
+				<input id="checkbox" type="checkbox" 
+				onchange="warning();" 
+				>Bling</input><br/>
+				<button onclick="upper()"> Snoopify</button>
+			</fieldset>
+	</body>
+</html>
