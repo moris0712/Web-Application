@@ -62,7 +62,7 @@ function overEnd() {
 
 // test for mouse being over document.body so that the player
 // can't cheat by going outside the maze
-function overBody(event) {
+function overBody(event) { //event.element() ==maze로 가버려서 됨
 	if(event.element() == document.body&& start==true){
 		overBoundary(event);
 	}
